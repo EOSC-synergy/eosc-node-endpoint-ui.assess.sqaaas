@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: feature/pynblint
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/eosc-node-endpoint-ui:
+      branch: main
+      repo: https://github.com/madgeek-arc/eosc-node-endpoint-ui
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint-ui git:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-violet-jackal.sh
+        container: qc.acc_pasty-ecru-cow
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint-ui find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-puce-pig.sh
+        container: qc.doc_snoopy-beige-tarantula
+      github.com/madgeek-arc/eosc-node-endpoint-ui git:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-lemon-duck.sh
+        container: qc.doc_smelly-bronze-tiger
+      github.com/madgeek-arc/eosc-node-endpoint-ui markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-platinum-chihuahua.sh
+        container: qc.doc_droopy-cinnabar-caracal
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint-ui licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-ruby-mongrel.sh
+        container: qc.lic_surly-cyan-chinook
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint-ui hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-viridian-mammoth.sh
+        container: qc.sty_craggy-dandelion-greyhound
+      github.com/madgeek-arc/eosc-node-endpoint-ui jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-cobalt-dunker.sh
+        container: qc.sty_paltry-harlequin-stingray
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/eosc-node-endpoint-ui get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-violet-fly.sh
+        container: qc.ver_lousy-amaranth-devil
+timeout: 5400
